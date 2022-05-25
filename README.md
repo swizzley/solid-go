@@ -4,5 +4,6 @@
 Go Server running SolidJS framework Skel
 
 ## Usage
-
-```make run```
+  * `make install`
+  * `make run` for port go backend on port 8080
+  * `make dev` for node backend on port 3000

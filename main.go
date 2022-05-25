@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -22,7 +21,6 @@ func main() {
 	tmpl = template.Must(template.ParseGlob("dist/*.html"))
 	rtr.HandleFunc("/", index)
 	rtr.PathPrefix("/assets").Handler(http.StripPrefix("/assets", http.FileServer(http.Dir("dist/assets"))))
-	rtr.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("unreal/"))))
 
 	log.Println("Server running at http://localhost:8080")
 
@@ -37,17 +35,6 @@ func main() {
 		log.Fatal("server failed", err)
 	}
 	//****************** MUST BE END OF MAIN ******************\\
-}
-
-func health(w http.ResponseWriter, r *http.Request) {
-	status := struct {
-		Status string
-	}{
-		"OK",
-	}
-	w.Header().Set("Content-Type", "application/json")
-	j, _ := json.Marshal(status)
-	w.Write(j)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
